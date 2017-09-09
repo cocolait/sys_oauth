@@ -1,5 +1,5 @@
 # sys_auth
-thinkphp 3 第三方登录扩展包包含（QQ,新浪，微信）
+thinkphp 3 第三方登录扩展包  目前支持（QQ登录,新浪登录，微信登录）
 
 # 安装
 > 确保已经安装composer 否则无法执行

@@ -86,10 +86,12 @@ abstract class Oauth{
     public function __construct($token = null){
         //设置SDK类型
         $class = get_class($this);
-        $this->Type = strtoupper(substr($class, 0, strlen($class)-3));
+        $re_str = str_replace("Cp\\Sys\\Sdk\\",'',$class);
+        $this->Type = strtoupper(substr($re_str, 0, strlen($re_str)-3));
 
         //获取应用配置
-        $config = sys_getConfig("SYA_AUTH_{$this->Type}");
+        $config = C("SYA_AUTH_{$this->Type}");
+
         if(empty($config['APP_KEY']) || empty($config['APP_SECRET'])){
             throw new \Exception('请配置您申请的APP_KEY和APP_SECRET');
         } else {
@@ -105,13 +107,16 @@ abstract class Oauth{
      * @return mixed 返回Oauth
      */
     public static function getInstance($type, $token = null) {
+        $temp_Sdk = [
+            'QqSDK','SinaSDK','WeixinSDK'
+        ];
         $name = ucfirst(strtolower($type)) . 'SDK';
-        require_once "Sdk/{$name}.php";
-        if (class_exists($name)) {
-            return new $name($token);
+        if (in_array($name,$temp_Sdk)) {
+            $class            = '\\Cp\\Sys\\Sdk\\' . $name;
+            return  new $class($token);
         } else {
             header('content-type:text/html;charset=utf-8');
-            throw new \Exception($name);
+            throw new \Exception('暂时还不支持该' . $name . '的扩展');
         }
     }
 
@@ -119,7 +124,7 @@ abstract class Oauth{
      * 初始化配置
      */
     protected function config(){
-        $config = sys_getConfig("SYA_AUTH_{$this->Type}");
+        $config = C("SYA_AUTH_{$this->Type}");
         if(!empty($config['AUTHORIZE']))
             $this->Authorize = $config['AUTHORIZE'];
         if(!empty($config['CALLBACK']))
