@@ -2,8 +2,8 @@
 /**
  * QQ SDK
  */
-namespace cocolait\sdk;
-class QqSDK extends \cocolait\Oauth{
+namespace Cp\Sys\Sdk;
+class QqSDK extends \Cp\Sys\Oauth{
 	/**
 	 * 获取requestCode的api接口
 	 * @var string

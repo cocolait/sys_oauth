@@ -12,13 +12,13 @@
             "email": "enkipen@qq.com"
         }
     ],
+    "minimum-stability": "stable",
     "autoload" : {
         "psr-4" : {
-            "cocolait\\" : "cocolait"
+            "Cp\\Sys\\" : "src/"
         },
         "files" : [
-            "cocolait/helper.php"
+            "src/helper.php"
         ]
-    },
-    "minimum-stability": "stable"
+    }
 }
