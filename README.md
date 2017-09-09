@@ -1,26 +1,32 @@
 # sys_auth
 thinkphp 3 第三方登录扩展包  目前支持（QQ登录,新浪登录，微信登录）
 
-# 安装
+
+# 安装（扩展包）
 > 确保已经安装composer 否则无法执行
 ```php
 composer require cocolait/sys_oauth
 ```
 
-# 示列
-
-#配置信息
+# thinkphp 3.x的版本不会自动加载composer 需要手动操作一下
+> 找到index.php入口文件
+> 在框架引入之前加载composer即可
 ```php
-config.php
+// 加载composer
+require './vendor/autoload.php';
+// 引入ThinkPHP入口文件
+require './ThinkPHP/ThinkPHP.php';
+```
+
+# 配置Config信息
+```php
 <?php
-//定义回调URL通用的URL
-define('URL_CALLBACK', 'http://' . $_SERVER['HTTP_HOST'] . '/index.php/Api/Oauth/callback/type/');
 return [
     //腾讯QQ登录配置
     'SYA_AUTH_QQ'      => [
-        'APP_KEY'       => '', //应用注册成功后分配的 APP ID
+        'APP_KEY'       => '',  //应用注册成功后分配的 APP ID
         'APP_SECRET'    => '',  //应用注册成功后分配的KEY
-        'CALLBACK'      => '', // 应用回调地址
+        'CALLBACK'      => '',  // 应用回调地址
     ],
     //新浪微博配置
     'SYA_AUTH_SINA'    => [
@@ -30,15 +36,15 @@ return [
     ],
     //微信登录
     'SYA_AUTH_WEIXIN' => [
-        'APP_KEY' => '',//应用注册成功后分配的 APP ID
-        'APP_SECRET' => '',//应用注册成功后分配的KEY
-        'CALLBACK' => "http://" . $_SERVER['HTTP_HOST'] . "/users/oauth/callback/type/weixin",//应用回调地址
+        'APP_KEY' => '',     //应用注册成功后分配的 APP ID
+        'APP_SECRET' => '',  //应用注册成功后分配的KEY
+        'CALLBACK' => "",    //应用回调地址
     ]
 );
 ```
 
-# 示列
->thinkPHP 3.2.3 为例
+# 控制器操作示列
+>thinkPHP 3.2.3 为例 php >= 5.3 或者 thinkphp 3.x都支持
 ```php
 namespace Home\Controller;
 use Think\Controller;
@@ -67,10 +73,10 @@ class OauthController extends Controller {
 
 		//获取当前第三方登录用户信息
 		if(is_array($token)){
-			$user_info = \Cp\Sys\GetInfo::getInstance($type,$token);
-			var_dump($user_info);
+			  $user_info = \Cp\Sys\GetInfo::getInstance($type,$token);
+			  var_dump($user_info);
 		}else{
-            echo "获取基本信息失败";
+              echo "获取基本信息失败";
 		}
 	}
 }
