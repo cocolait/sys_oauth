@@ -3,7 +3,9 @@ thinkphp 3 第三方登录扩展包包含（QQ,新浪，微信）
 
 # 安装
 > 确保已经安装composer 否则无法执行
+```php
 composer require cocolait/sys_oauth
+```
 
 # 示列
 
