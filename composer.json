@@ -1,6 +1,6 @@
 {
     "name": "cocolait/sys_oauth",
-    "description": "thinkphp 3 third party login",
+    "description": "thinkphp 3.x weixin weibo qq sns oauth",
     "type": "library",
     "require": {
         "php": ">=5.3.0"
