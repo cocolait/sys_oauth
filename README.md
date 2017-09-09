@@ -50,6 +50,7 @@ namespace Home\Controller;
 use Think\Controller;
 class OauthController extends Controller {
 	//登录地址
+	//目前type参数 只支持 [qq,sina,weixin]
 	public function login($type = null){
 		empty($type) && $this->error('参数错误');
 		$_SESSION['login_http_referer']=$_SERVER["HTTP_REFERER"];
