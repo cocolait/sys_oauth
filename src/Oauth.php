@@ -106,7 +106,7 @@ abstract class Oauth{
      */
     public static function getInstance($type, $token = null) {
         $name = ucfirst(strtolower($type)) . 'SDK';
-        require_once "Sdk/{$name}.class.php";
+        require_once "Sdk/{$name}.php";
         if (class_exists($name)) {
             return new $name($token);
         } else {

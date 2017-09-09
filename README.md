@@ -47,7 +47,7 @@ class OauthController extends Controller {
 	public function login($type = null){
 		empty($type) && $this->error('参数错误');
 		$_SESSION['login_http_referer']=$_SERVER["HTTP_REFERER"];
-		$sns  = \Cocolait\Sys\Oauth::getInstance($type);
+		$sns  = \Cp\Sys\Oauth::getInstance($type);
 		//跳转到授权页面
 		redirect($sns->getRequestCodeURL());
 	}
@@ -60,14 +60,14 @@ class OauthController extends Controller {
 			redirect(__ROOT__."/");
 		}
 
-		$sns  = \Cocolait\Sys\Oauth::getInstance($type);
+		$sns  = \Cp\Sys\Oauth::getInstance($type);
 		$extend = null;
         // 获取TOKEN
 		$token = $sns->getAccessToken($code , $extend);
 
 		//获取当前第三方登录用户信息
 		if(is_array($token)){
-			$user_info = \Cocolait\Sys\GetInfo::getInstance($type,$token);
+			$user_info = \Cp\Sys\GetInfo::getInstance($type,$token);
 			var_dump($user_info);
 		}else{
             echo "获取基本信息失败";
